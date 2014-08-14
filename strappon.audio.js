@@ -34,6 +34,20 @@ sound.prototype = {
 		else if(this.debug() && console) console.log(a);
 		else if(this.debug()) throw(a);
 	},
+	notready : function(id,type){
+		var local = this;
+		if(typeof local.onready === "function"){
+			local.debug("fn.NOTREADY: Audio not ready yet. Onready function will be triggered as soon as ready.");
+		} else {
+			local.debug("fn.NOTREADY: Audio not ready yet. Queued to " + type + " as soon as ready.");
+			if(local.onready.length && local.onready[local.onready.length - 1].length >= 2 && local.onready[local.onready.length - 1][1] === "loop"){
+				local.debug("fn.NOTREADY: Audio not ready yet. Cannot " + type + " as previously added item is a loop.");
+			} else {
+				local.onready.push([id,type]);
+			}
+		}
+		return;
+	},
 	help : function(fn){
 		if(console){ 
 			var functions = {
@@ -128,13 +142,8 @@ sound.prototype = {
 	play : function(instance){
 		var local = this;
 		local.debug("fn.PLAY: Trying to play '" + instance + "'...");
-		if(!local.ready){ 
-			if(typeof local.onready === "function"){
-				local.debug("fn.PLAY: Audio not ready yet. Onready function will be triggered as soon as ready.");
-			} else {
-				local.debug("fn.PLAY: Audio not ready yet. Queued to play as soon as ready.");
-				local.onready.push([instance,"play"]);
-			}
+		if(!local.ready){
+			local.notready(instance,"play");
 			return;
 		}
 		if(local.mute()){
@@ -196,28 +205,19 @@ sound.prototype = {
 		local.consecutiveTimeout = false;
 	},
 	looping : false,
-	loop : function(id){
+	loop : function(instance){
 		var local = this;
-		if(!local.ready){ 
-			if(typeof local.onready === "function"){
-				local.debug("fn.LOOP: Audio not ready yet. Onready function will be triggered as soon as ready.");
-			} else {
-				local.debug("fn.LOOP: Audio not ready yet. Queued to loop as soon as ready.");
-				if(local.onready.length && local.onready[local.onready.length - 1].length >= 2 && local.onready[local.onready.length - 1][1] === "loop"){
-					local.debug("fn.LOOP: Audio not ready yet. Cannot loop as previously added item is already a loop.");
-				} else {
-					local.onready.push([id,"loop"]);
-				}
-			}
+		if(!local.ready){
+			local.notready(instance,"loop");
 			return;
 		}
-		local.debug("fn.LOOP Looping instance '" + id + "'.");
-		if(id && local.instances[id] != undefined){
+		local.debug("fn.LOOP Looping instance '" + instance + "'.");
+		if(instance && local.instances[instance] != undefined){
 			local.stop();
-			local.play(id);
+			local.play(instance);
 			local.looping = setInterval(function(){
-				local.play(id);
-			}, local.instances[id].duration * 1000);
+				local.play(instance);
+			}, local.instances[instance].duration * 1000);
 		} else {
 			clearInterval(local.looping);
 			local.looping = false;
