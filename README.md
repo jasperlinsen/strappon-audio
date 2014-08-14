@@ -9,15 +9,15 @@ The Strappon Audio plugin allows easy, cross-platform web audio performance. For
 
 ###Including the API in your page
 
-Including the API into your page is as easy as loading it in a script tag. You can do this anywhere but it is recommended to do so on in the`&lt;head&gt;`tag.
+Including the API into your page is as easy as loading it in a script tag. You can do this anywhere but it is recommended to do so on in the`<head>`tag.
 
 `
-&lt;script type="text/javascript" src="folder/structure/strappon.audio.js"&gt;&lt;/script&gt;
+<script type="text/javascript" src="folder/structure/strappon.audio.js"></script>
 `
 As long as you initialise your audio after including this file, it will work. Initialising your audio is as easy as calling a new `sound ()` object and passing it some parameters. By default debugging is on, but if you turn debug on you will see instructions on how to work with the API. You can always call the `help()`function to get more info on any of the API functions, or use this document as reference.
 
 `
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
 	var _audio = new sound({
 url:"folder/structure/file.wav",
 debug:true,
@@ -25,9 +25,9 @@ instances : {
 	"instanceName" : { "start" : 0, "duration" : 2 },
 }
 	});
-&lt;/script&gt;
+</script>
 `
-By turning debug on initialisation, debugging will report a lot of things that are going on. This will only work on browsers with a *console&lt;/span&gt;, and it will throw an alert on browser that don't support *console.log&lt;/span&gt;.
+By turning debug on initialisation, debugging will report a lot of things that are going on. This will only work on browsers with a *console</span>, and it will throw an alert on browser that don't support *console.log</span>.
 
 There are three major ways in which you can play audio: play, loop and consecutive. 
 `Play` will simply play the audio and stop after the first play. You can pull it as often as you want and is useful for pulling at certain events. 
@@ -35,7 +35,7 @@ There are three major ways in which you can play audio: play, loop and consecuti
 `Consecutive` allows stacking of audio one after the other. This allows you to create a chain that ends in a loop by passing an array that either contains strings (every string will be played in order), or arrays (where the first element is the instance and the second is either play or loop). Once a loop element is found, it will stop executing the consecutive function.
 
 `
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
 	_audio.play("instanceName");
 	_audio.loop("instanceName");
 	_audio.consecutive([
@@ -43,7 +43,7 @@ There are three major ways in which you can play audio: play, loop and consecuti
 ["instanceName","play"],
 ["instanceName","loop"]
 	]);
-&lt;/script&gt;
+</script>
 `
 
 Any audio events fired before the file is ready will be stacked and played consecutively as soon as the file is loaded in. You can check whether the file is ready by polling the `ready` variable. You can also redefine the `onready` as a function to be pulled when ready by passing a `{ready : function(){}` function on initialisation.
