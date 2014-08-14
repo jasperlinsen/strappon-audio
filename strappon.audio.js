@@ -198,6 +198,19 @@ sound.prototype = {
 	looping : false,
 	loop : function(id){
 		var local = this;
+		if(!local.ready){ 
+			if(typeof local.onready === "function"){
+				local.debug("fn.LOOP: Audio not ready yet. Onready function will be triggered as soon as ready.");
+			} else {
+				local.debug("fn.LOOP: Audio not ready yet. Queued to loop as soon as ready.");
+				if(local.onready.length && local.onready[local.onready.length - 1].length >= 2 && local.onready[local.onready.length - 1][1] === "loop"){
+					local.debug("fn.LOOP: Audio not ready yet. Cannot loop as previously added item is already a loop.");
+				} else {
+					local.onready.push([id,"loop"]);
+				}
+			}
+			return;
+		}
 		local.debug("fn.LOOP Looping instance '" + id + "'.");
 		if(id && local.instances[id] != undefined){
 			local.stop();
