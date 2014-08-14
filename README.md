@@ -9,11 +9,11 @@ The Strappon Audio plugin allows easy, cross-platform web audio performance. For
 
 ###Including the API in your page
 
-Including the API into your page is as easy as loading it in a script tag. You can do this anywhere but it is recommended to do so on in the `<head>` tag.
+Including the API into your page is as easy as loading it in a script tag. You can do this anywhere but it is recommended to do so just before the closing `</body>` tag. The mivifed version is available and recommended to use as well.
 
-	<script type="text/javascript" src="folder/structure/strappon.audio.js"></script>
+	<script type="text/javascript" src="folder/structure/strappon.audio.min.js"></script>
 
-As long as you initialise your audio after including this file, it will work. Initialising your audio is as easy as calling a `new sound ()` and passing it some parameters. By default debugging is on, but if you turn debug on you will see instructions on how to work with the API. You can always call the `help()`function to get more info on any of the API functions, or use this document as reference.
+As long as you initialise your audio after including this file, it will work. Initialising your audio is as easy as calling a `new sound ()` and passing it some parameters. By default debugging is off, but if you turn debugging on you will see instructions on how to work with the API. You can always call the `help()`function to get more info on any of the API functions, or use this document as reference.
 
 	<script type="text/javascript">
 		var _audio = new sound({
