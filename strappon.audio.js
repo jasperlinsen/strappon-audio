@@ -1,8 +1,7 @@
 /******************************************************
-	js.audio.js
-		started on 27/04/2014
-		latest update on 07/08/2014
-		by Jasper Linsen
+strappon.audio.js
+	started on 27/04/2014
+	started by Jasper Linsen
 ******************************************************/
 
 function sound(object){
