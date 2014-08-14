@@ -25,7 +25,7 @@ As long as you initialise your audio after including this file, it will work. In
 		});
 	</script>
 
-By turning debug on initialisation, debugging will report a lot of things that are going on. This will only work on browsers with a `console`, and it will throw an alert on browser that don't support `console.log`>.
+By turning debug on initialisation, debugging will report a lot of things that are going on. This will only work on browsers with a `console`, and it will throw an alert on browser that don't support `console.log`.
 
 There are three major ways in which you can play audio: play, loop and consecutive. 
 `Play` will simply play the audio and stop after the first play. You can pull it as often as you want and is useful for pulling at certain events. 
@@ -42,51 +42,70 @@ There are three major ways in which you can play audio: play, loop and consecuti
 		]);
 	</script>
 
-Any audio events fired before the file is ready will be stacked and played consecutively as soon as the file is loaded in. You can check whether the file is ready by polling the `ready` variable. You can also redefine the `onready` as a function to be pulled when ready by passing a `{ready : function(){}` function on initialisation.
+Any audio events fired before the file is ready will be stacked and played consecutively as soon as the file is loaded in. You can check whether the file is ready by polling the `ready` variable. You can also redefine the `onready` as a function to be pulled when ready by passing `{ready : function(){}}` on initialisation.
 
 ##API
 
 ###fn.INIT
 
 `var.init($url,$instances)` 
+
 Initialise audio.
+
 `$url` {STR} Location of file.
+
 `$instances` {OBJ: {$name : {$start, $duration}}}: Object containing named objects with a start and duration (floats).
 	
 ###fn.TRACK
 
 `var.track($url)`
+
 Initialise audio file.
+
 `$url` {STR} Location of file.
 	
 ###fn.ADD
 
 `var.add($name,$start,$duration)`
+
 Add instance of audio.
+
 `$name` {STR} Name of this instance.
+
 `$start` {INT/FLOAT}: Point in track where instance starts (seconds).
+
 `$duration` {INT/FLOAT}: Length of instance.
 
 ###fn.PLAY
 
 `var.play($instance)`
+
 Play instance.
+
 `$instance` {STR} Name of instance to be played.
+
 ###fn.STOP
 
 `var.stop()`
+
 Stop audio.
 
 ###fn.LOOP
 
 `var.loop($instance)`
+
 Loop instance.
+
 `$instance` {STR} Name of instance to be looped.
 
 ###fn.CONSECUTIVE
 
 `var.consecutive($instances)`
+
 Play instances consecutively.
+
 `$instances` {ARRAY} Array consisting of either strings (to play one after the other), or other arrays ([$instance, $type]).
+
 `$instance` {STR} : Name of instance.
+
 `$type` {STR} : Play type (loop or play).
