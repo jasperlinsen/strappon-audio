@@ -9,23 +9,23 @@ The Strappon Audio plugin allows easy, cross-platform web audio performance. For
 
 ###Including the API in your page
 
-Including the API into your page is as easy as loading it in a script tag. You can do this anywhere but it is recommended to do so on in the`<head>`tag.
+Including the API into your page is as easy as loading it in a script tag. You can do this anywhere but it is recommended to do so on in the `<head>` tag.
 
 	<script type="text/javascript" src="folder/structure/strappon.audio.js"></script>
 
-As long as you initialise your audio after including this file, it will work. Initialising your audio is as easy as calling a new `sound ()` object and passing it some parameters. By default debugging is on, but if you turn debug on you will see instructions on how to work with the API. You can always call the `help()`function to get more info on any of the API functions, or use this document as reference.
+As long as you initialise your audio after including this file, it will work. Initialising your audio is as easy as calling a `new sound ()` and passing it some parameters. By default debugging is on, but if you turn debug on you will see instructions on how to work with the API. You can always call the `help()`function to get more info on any of the API functions, or use this document as reference.
 
 	<script type="text/javascript">
 		var _audio = new sound({
-	url:"folder/structure/file.wav",
-	debug:true,
-	instances : {
-		"instanceName" : { "start" : 0, "duration" : 2 },
-	}
+			url:"folder/structure/file.wav",
+			debug:true,
+			instances : {
+				"instanceName" : { "start" : 0, "duration" : 2 },
+			}
 		});
 	</script>
 
-By turning debug on initialisation, debugging will report a lot of things that are going on. This will only work on browsers with a *console</span>, and it will throw an alert on browser that don't support *console.log</span>.
+By turning debug on initialisation, debugging will report a lot of things that are going on. This will only work on browsers with a `console`, and it will throw an alert on browser that don't support `console.log`>.
 
 There are three major ways in which you can play audio: play, loop and consecutive. 
 `Play` will simply play the audio and stop after the first play. You can pull it as often as you want and is useful for pulling at certain events. 
@@ -36,9 +36,9 @@ There are three major ways in which you can play audio: play, loop and consecuti
 		_audio.play("instanceName");
 		_audio.loop("instanceName");
 		_audio.consecutive([
-	"instanceName",
-	["instanceName","play"],
-	["instanceName","loop"]
+			"instanceName",
+			["instanceName","play"],
+			["instanceName","loop"]
 		]);
 	</script>
 
